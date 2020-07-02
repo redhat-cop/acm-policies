@@ -18,6 +18,12 @@ spec:
         apiVersion: v1
         metadata:
           name: custom-policies
+    - complianceType: musthave
+      objectDefinition:
+        kind: Namespace 
+        apiVersion: v1
+        metadata:
+          name: additional-policies
 ---
 apiVersion: mcm.ibm.com/v1alpha1
 kind: PlacementBinding
