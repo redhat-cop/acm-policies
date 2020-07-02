@@ -10,3 +10,10 @@ spec:
   channel: custom-policies/acm-gitops-github
   placement:
     local: true
+#  timewindow:
+#    windowtype: "active"
+#    location: "America/Los_Angeles"
+#    daysofweek: [ "Friday", "Saturday", "Sunday" ]
+#    hours:
+#      - start: "05:00PM"
+#        end: "10:00PM"
