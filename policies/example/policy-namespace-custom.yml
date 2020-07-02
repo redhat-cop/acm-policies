@@ -18,7 +18,7 @@ spec:
         apiVersion: v1
         metadata:
           name: custom-policies
-    - complianceType: musthave
+    - complianceType: mustnothave
       objectDefinition:
         kind: Namespace 
         apiVersion: v1
