@@ -1,0 +1,12 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: acm-policies-example
+  namespace: custom-policies
+  annotations:
+    apps.open-cluster-management.io/github-path: policies/example
+    apps.open-cluster-management.io/github-branch: policy-example
+spec:
+  channel: custom-policies/acm-gitops-github
+  placement:
+    local: true
