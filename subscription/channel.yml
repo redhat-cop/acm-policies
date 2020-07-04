@@ -6,3 +6,5 @@ metadata:
 spec:
   type: GitHub
   pathname: https://github.com/redhat-cop/acm-policies.git
+  #secretRef:
+  #  name: github-secret
