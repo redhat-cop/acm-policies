@@ -1,0 +1,13 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-namespace-custom
+  namespace: custom-policies
+placementRef:
+  name: placement-policy-namespace-custom
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-namespace-custom
+  kind: Policy
+  apiGroup: policy.mcm.ibm.com

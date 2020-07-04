@@ -1,0 +1,18 @@
+apiVersion: policy.mcm.ibm.com/v1alpha1
+kind: Policy
+metadata:
+  name: policy-namespace-custom
+spec:
+  object-templates:
+    - complianceType: musthave
+      objectDefinition:
+        kind: Namespace 
+        apiVersion: v1
+        metadata:
+          name: project-orchid
+    - complianceType: mustnothave
+      objectDefinition:
+        kind: Namespace 
+        apiVersion: v1
+        metadata:
+          name: project-succulent
