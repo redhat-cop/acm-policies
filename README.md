@@ -48,7 +48,7 @@ acm-policies
 4. Create a subscription using the new overlay.
 5. Apply the channel and namespace to the hub cluster.
 ```
-$ oc apply -f channel/*
+$ oc apply -f channel/
 ```
 5. Apply the subscription to the hub cluster.
 ```
