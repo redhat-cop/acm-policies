@@ -6,7 +6,7 @@ Kustomizable Policies and Channel/Subscription objects for Advanced Cluster Mana
 
 For each use case,
 1. Create a unique usecase folder under policies/
-2. Create a USECASE.md file to explain the actions and purpose of the collection of policies.
+2. Create a README.md file under the folder to explain the actions and purpose of the collection of policies.
 3. Create a base folder for base files: policies, placement rules, and bindings.
 4. Create an overlay folder with at least 1 overlay example on how to kustomize it.
 5. Create subscription(s) for the overlay examples.
