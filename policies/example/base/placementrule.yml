@@ -4,8 +4,8 @@ metadata:
   name: placement-policy-namespace-custom
   namespace: custom-policies
 spec:
-  clusterConditions:
-  - type: OK
+  - status: “True”
+    type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
       - {key: cloud, operator: In, values: ["Amazon"]}

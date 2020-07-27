@@ -1,9 +1,9 @@
-apiVersion: policy.mcm.ibm.com/v1alpha1
+apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-namespace-custom
 spec:
-  object-templates:
+  policy-templates:
     - complianceType: musthave
       objectDefinition:
         kind: Namespace 
