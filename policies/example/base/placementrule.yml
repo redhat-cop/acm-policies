@@ -3,9 +3,6 @@ kind: PlacementRule
 metadata:
   name: placement-policy-example
 spec:
-  clusterConditions:
-  - status: “True”
-    type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
       - {key: cloud, operator: In, values: ["Amazon"]}
