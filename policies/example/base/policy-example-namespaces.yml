@@ -2,7 +2,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-example
-  namespace: custom-policies
   annotations:
     policy.open-cluster-management.io/standards: 
     policy.open-cluster-management.io/categories: 
@@ -17,6 +16,11 @@ spec:
         metadata:
           name: policy-example-namespaces
         spec:
+          remediationAction: inform
+          severity: low
+          namespaceSelector:
+            exclude: ["kube-*"]
+            include: ["custom-policies"]
           object-templates:
             - complianceType: musthave
               objectDefinition:
