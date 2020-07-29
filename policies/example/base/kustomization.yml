@@ -1,5 +1,5 @@
 resources:
-- policy-namespace-custom.yml
+- policy-example-namespaces.yml
 - placementrule.yml
 - bindings.yml
 
