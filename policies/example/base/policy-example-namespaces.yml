@@ -32,5 +32,5 @@ spec:
               objectDefinition:
                 apiVersion: v1
                 kind: Namespace
-              metadata:
-                name: project-two
+                metadata:
+                  name: project-two
