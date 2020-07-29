@@ -2,7 +2,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-example
-  namespace: custom-policies
 placementRef:
   name: placement-policy-example
   kind: PlacementRule
