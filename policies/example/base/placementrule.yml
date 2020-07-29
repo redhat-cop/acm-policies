@@ -1,7 +1,7 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: placement-policy-namespace-custom
+  name: placement-policy-example
   namespace: custom-policies
 spec:
   - status: “True”

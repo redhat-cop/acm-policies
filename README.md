@@ -15,8 +15,8 @@ For each use case,
 ```
 acm-policies
 ├── channel
-│   ├── channel.yml
-│   └── namespace.yml
+│   ├── 01_namespace.yml
+│   └── 02_channel.yml
 ├── policies
 │   └── example
 |       ├── USECASE.md

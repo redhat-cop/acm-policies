@@ -1,0 +1,32 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-example
+  namespace: custom-policies
+  annotations:
+    policy.open-cluster-management.io/standards: 
+    policy.open-cluster-management.io/categories: 
+    policy.open-cluster-management.io/controls: 
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-example-namespaces
+        spec:
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1             
+                kind: Namespace
+                metadata:
+                  name: project-one
+            - complianceType: mustnothave
+              objectDefinition:
+                apiVersion: v1
+                kind: Namespace
+              metadata:
+                name: project-two
