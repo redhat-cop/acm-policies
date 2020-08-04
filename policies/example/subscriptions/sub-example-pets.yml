@@ -4,7 +4,7 @@ metadata:
   name: acm-policies-example-pets
   namespace: custom-policies
   labels:
-    subscription-pause: false
+    subscription-pause: "false"
   annotations:
     apps.open-cluster-management.io/github-path: policies/example/overlays/pets
     apps.open-cluster-management.io/github-branch: new-api-version
