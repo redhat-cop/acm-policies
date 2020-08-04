@@ -1,18 +1,30 @@
-apiVersion: policy.mcm.ibm.com/v1alpha1
+apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
-  name: policy-namespace-custom
+  name: policy-example
 spec:
-  object-templates:
-    - complianceType: musthave
-      objectDefinition:
-        kind: Namespace 
-        apiVersion: v1
-        metadata:
-          name: project-orchid
-    - complianceType: mustnothave
-      objectDefinition:
-        kind: Namespace 
-        apiVersion: v1
-        metadata:
-          name: project-succulent
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: policy-example-namespaces
+      spec:
+        remediationAction: inform
+        severity: low
+        namespaceSelector:
+          exclude: ["kube-*"]
+          include: ["custom-policies"]
+        object-templates:
+        - complianceType: musthave
+          objectDefinition:
+            apiVersion: v1             
+            kind: Namespace
+            metadata:
+              name: project-orchid
+        - complianceType: mustnothave
+          objectDefinition:
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: project-succulent

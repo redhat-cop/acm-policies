@@ -1,0 +1,36 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-example
+  annotations:
+    policy.open-cluster-management.io/standards: 
+    policy.open-cluster-management.io/categories: 
+    policy.open-cluster-management.io/controls: 
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-example-namespaces
+        spec:
+          remediationAction: inform
+          severity: low
+          namespaceSelector:
+            exclude: ["kube-*"]
+            include: ["custom-policies"]
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1             
+                kind: Namespace
+                metadata:
+                  name: project-one
+            - complianceType: mustnothave
+              objectDefinition:
+                apiVersion: v1
+                kind: Namespace
+                metadata:
+                  name: project-two

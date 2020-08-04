@@ -3,9 +3,11 @@ kind: Subscription
 metadata:
   name: acm-policies-example-plants
   namespace: custom-policies
+  labels:
+    subscription-pause: "false"
   annotations:
     apps.open-cluster-management.io/github-path: policies/example/overlays/plants
-    apps.open-cluster-management.io/github-branch: policy-example
+    apps.open-cluster-management.io/github-branch: master
 spec:
   channel: custom-policies/acm-gitops-github
   placement:
