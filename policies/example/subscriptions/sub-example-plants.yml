@@ -7,7 +7,7 @@ metadata:
     subscription-pause: "false"
   annotations:
     apps.open-cluster-management.io/github-path: policies/example/overlays/plants
-    apps.open-cluster-management.io/github-branch: new-api-version
+    apps.open-cluster-management.io/github-branch: master
 spec:
   channel: custom-policies/acm-gitops-github
   placement:
