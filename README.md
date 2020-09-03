@@ -1,6 +1,9 @@
 # acm-policies
 
-Kustomizable Policies and Channel/Subscription objects for Advanced Cluster Management.
+Kustomizable Policies and Channel/Subscription objects for Advanced Cluster Management. This project covers use cases commonly found in consulting engagements and are provided to make configuration and enforcement adhere to Red Hat Consulting's best practices.
+
+There are also product focused policies found in the upstream project (Open Cluster Management) called [policy-collection](https://github.com/open-cluster-management/policy-collection). The product team will periodically check here for useful policies.
+
 
 ## Creating new Policies
 
