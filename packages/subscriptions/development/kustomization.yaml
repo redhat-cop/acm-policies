@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- ../base
+
+# When applying the kustomization for development, use the development
+# branch and set the reconcile-rate to 'off' for on-demand reconciliation.
+commonAnnotations:
+  apps.open-cluster-management.io/github-branch: development
+  apps.open-cluster-management.io/reconcile-rate: "off"

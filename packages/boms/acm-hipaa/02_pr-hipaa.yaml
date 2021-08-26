@@ -1,0 +1,19 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: pr-hipaa
+  namespace: acm-hipaa
+spec:
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
+#  clusterNames:
+#    - "cluster1"
+#    - "cluster2"
+  clusterSelector:
+    matchLabels:
+      policy: "hipaa"
+#  clusterSelector:
+#    matchExpressions:
+#      - {key: clustertype, operator: In, values: ["hub"]}
