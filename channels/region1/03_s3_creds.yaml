@@ -5,6 +5,6 @@ metadata:
   name: s3-creds
   namespace: acm-channels
 data:
-  AccessKeyID: YmFzZTY0ZW5jQWNjZXNzS2V5SUQK # base64encAccessKeyID
-  SecretAccessKey: YmFzZTY0ZW5jU2VjcmV0QWNjZXNzS2V5Cg== # base64encSecretAccessKey
-  Region: dXMtd2VzdC0xCg== # us-west-1
+  AccessKeyID: base64encAccessKeyID
+  SecretAccessKey: base64encSecretAccessKey
+  Region: base64encRegion
