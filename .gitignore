@@ -1,0 +1,5 @@
+# Ignore folders channels/ and observability/ because they contain credentials
+# that should not be stored.
+channels/
+observability/
+
