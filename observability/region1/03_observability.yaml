@@ -1,0 +1,23 @@
+---
+apiVersion: observability.open-cluster-management.io/v1beta2
+kind: MultiClusterObservability
+metadata:
+  name: observability
+  namespace: open-cluster-management-observability
+spec:
+  availabilityConfig: High
+  enableDownSampling: false
+  imagePullPolicy: Always
+  imagePullSecret: multiclusterhub-operator-pull-secret
+  observabilityAddonSpec: 
+    enableMetrics: true
+    interval: 60 
+  retentionResolution1h: 30d
+  retentionResolution5m: 14d
+  retentionResolutionRaw: 5d
+  storageConfigObject:
+    metricObjectStorage:
+      name: acmthanos
+      key: thanos.yaml
+    statefulSetSize: 10Gi
+    statefulSetStorageClass: gp2
