@@ -1,6 +1,0 @@
-resources:
-- policy-example-namespaces.yml
-- placementrule.yml
-- bindings.yml
-
-

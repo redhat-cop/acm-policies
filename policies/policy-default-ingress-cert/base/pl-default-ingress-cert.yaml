@@ -1,0 +1,89 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: pl-default-ingress-certificate
+spec:
+  remediationAction: inform
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: ingress-controller-custom-cert
+        spec:
+          remediationAction: inform
+          severity: low
+          namespaceSelector:
+            exclude: ["kube-*"]
+            include: ["custom-policies"]
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: ConfigMap
+                metadata:
+                  name: custom-ca
+                  namespace: openshift-config
+                data:
+                  ca-bundle.crt: |
+                    -----BEGIN CERTIFICATE-----
+                    MIIEhDCCA2ygAwIBAgIUBHOnq4b49Tb9SEjW3NMbUavnuoYwDQYJKoZIhvcNAQEF
+                    BQAwgYAxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMREwDwYDVQQH
+                    DAhTYW4gSm9zZTEOMAwGA1UECgwFVmVyc2UxFjAUBgNVBAMMDVZlcnNlIFJvb3Qg
+                    Q0ExITAfBgkqhkiG9w0BCQEWEmR0cmlldTgwQGdtYWlsLmNvbTAeFw0yMTA1MDEw
+                    NTA1MjlaFw0yNjA0MzAwNTA1MjlaMIGAMQswCQYDVQQGEwJVUzETMBEGA1UECAwK
+                    Q2FsaWZvcm5pYTERMA8GA1UEBwwIU2FuIEpvc2UxDjAMBgNVBAoMBVZlcnNlMRYw
+                    FAYDVQQDDA1WZXJzZSBSb290IENBMSEwHwYJKoZIhvcNAQkBFhJkdHJpZXU4MEBn
+                    bWFpbC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQD5dbjsdh8m
+                    6EbOik2qJIF0Td5rBsJ5bkClqgpgCVP1gQ2q8UXCuYESRbhZdKttQe8bce2IgsRE
+                    LJgnfUl7ldhwFGkygZL+1a4kN+74vo8oISSOLKIuqmwShflgaOoU5CBRJc4FEjwn
+                    jMo9bHW/NpRkc2ATprH5kMqowUR3yUYyWCjP4QenCCfcPkJqLnSmi5jzB5/3+ytu
+                    SQodP0MKWiM44I8eTh3MBXAY1wPLS1ZzK91J2K3YLtrrwTHE39WsgapyAikwhiOm
+                    zHcPTzXPFzrgTVvvR06ZhOf1vZN5VZhCxa/zuPC4eeLaWD/wMEy+rmyBdpuQ04nR
+                    u/UpXOiG9/kRAgMBAAGjgfMwgfAwHQYDVR0OBBYEFFSXE+PLLDyLjGabnfTlRbPW
+                    Rbe0MIHABgNVHSMEgbgwgbWAFFSXE+PLLDyLjGabnfTlRbPWRbe0oYGGpIGDMIGA
+                    MQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTERMA8GA1UEBwwIU2Fu
+                    IEpvc2UxDjAMBgNVBAoMBVZlcnNlMRYwFAYDVQQDDA1WZXJzZSBSb290IENBMSEw
+                    HwYJKoZIhvcNAQkBFhJkdHJpZXU4MEBnbWFpbC5jb22CFARzp6uG+PU2/UhI1tzT
+                    G1Gr57qGMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEBAF2npuDEY++T
+                    xdN2IW8bT4izCAHTO3glSIbc4UOKuKeRfjH/MLeo9fjtAmG6hMDBfsd90C0Lacb4
+                    0SpN8rKJjlo/TDpeCcoJm0UNbGv8TkajizWge8lIYr+xozlUddqg4fWYD8rqM6pn
+                    4omyoHY5zgW6PuTqgerXCW5iN7u64LVrId86Oyp2nFu2+83jMNxeb/uva8RLfg8F
+                    ZsP3LFNSnbNBGSjfSmHxxABjHSdLMaelJCXfk18uRVwKSvbZyrm3PkExrMAWXRcT
+                    Lzp4FqCweRMCV25SyrG8KIOjFYlnANyKl5wN30v98Fko5m1b5prNOu8htWsL7Xvg
+                    lEhaB0APbqo=
+                    -----END CERTIFICATE-----
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: config.openshift.io/v1
+                kind: Proxy
+                metadata:
+                  name: cluster
+                spec:
+                  trustedCA:
+                    name: 'custom-ca'
+            - complianceType: musthave
+              objectDefinition:
+                kind: Secret
+                apiVersion: v1
+                metadata:
+                  name: wildcardcert
+                  namespace: openshift-ingress
+                data:
+                  tls.crt: >-
+                    LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUV1VENDQTZHZ0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRVUZBRENCZ0RFTE1Ba0dBMVVFQmhNQ1ZWTXgKRXpBUkJnTlZCQWdNQ2tOaGJHbG1iM0p1YVdFeEVUQVBCZ05WQkFjTUNGTmhiaUJLYjNObE1RNHdEQVlEVlFRSwpEQVZXWlhKelpURVdNQlFHQTFVRUF3d05WbVZ5YzJVZ1VtOXZkQ0JEUVRFaE1COEdDU3FHU0liM0RRRUpBUllTClpIUnlhV1YxT0RCQVoyMWhhV3d1WTI5dE1CNFhEVEl4TURVd01qRXpOVFEwTmxvWERUSXlNRFV3TWpFek5UUTAKTmxvd2dZSXhDekFKQmdOVkJBWVRBbFZUTVJNd0VRWURWUVFJREFwRFlXeHBabTl5Ym1saE1RNHdEQVlEVlFRSwpEQVZXWlhKelpURU1NQW9HQTFVRUN3d0RUR0ZpTVIwd0d3WURWUVFEREJRcUxtRndjSE11YkdGaUxuWmxjbk5sCkxtUjVkREVoTUI4R0NTcUdTSWIzRFFFSkFSWVNaSFJ5YVdWMU9EQkFaMjFoYVd3dVkyOXRNSUlCSWpBTkJna3EKaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF5SmxmUmNwM2Z4RUNNcjVLV2JXN0lGell1L0hNYjhrRwpLNklLVkpkVVVvNUtnMXE4V2NVK1A3QnorYnUwTDdmN2prV0dzcDJRUk1QelRmS3h5N3dGQmJ0NXk2ZHNncFh6CitoZVpraVQ5OW5lMzQ2S2NsVVlHWnN5ek14d2J5cEtvTzgydFdMNEdPU0VPY3RwSnZTZ0ZmVHJZa1QvSEZydjAKaytEY3o5N0I5ckJXTW03dWRQSUxWQzhxcFdEWXhDR3BwdWxuTUY0VVlTQlpnejgzZEp5S3lybUp6NENDdTFYTwo1cUN6cDBwK1RWd0txd3JyclBYdUJOaERHcGRCVGVmZ1RKMS9XSnpXd0FsVExKdVZmcUJQalBJQU5UYllRZEtSCjZGWVlXdjVIdDZKNTRtekJnMWJUVmpKYU05VjE5ZVVaR2ozN1cwL2IvZ2xKZFNheEh2ZS9HUUlEQVFBQm80SUIKT0RDQ0FUUXdDUVlEVlIwVEJBSXdBREFkQmdOVkhRNEVGZ1FVWXNtN1pWa2RITkVrSGs3SFc0NWtlWmVpeUdNdwpnY0FHQTFVZEl3U0J1RENCdFlBVVZKY1Q0OHNzUEl1TVpwdWQ5T1ZGczlaRnQ3U2hnWWFrZ1lNd2dZQXhDekFKCkJnTlZCQVlUQWxWVE1STXdFUVlEVlFRSURBcERZV3hwWm05eWJtbGhNUkV3RHdZRFZRUUhEQWhUWVc0Z1NtOXoKWlRFT01Bd0dBMVVFQ2d3RlZtVnljMlV4RmpBVUJnTlZCQU1NRFZabGNuTmxJRkp2YjNRZ1EwRXhJVEFmQmdrcQpoa2lHOXcwQkNRRVdFbVIwY21sbGRUZ3dRR2R0WVdsc0xtTnZiWUlVQkhPbnE0YjQ5VGI5U0VqVzNOTWJVYXZuCnVvWXdSUVlKWUlaSUFZYjRRZ0VFQkRnV05taDBkSEE2THk5ellXNWtZbTk0TG5abGNuTmxMbVI1ZERvNE1EZ3cKTDNKdmIzUXRZMkV2ZG1WeWMyVXRZMkV0WTNKc0xuQmxiVEFOQmdrcWhraUc5dzBCQVFVRkFBT0NBUUVBUXFvTwovYjRpaHUxTm9OL1RUeHpqVGlhelU5TmZCYlhXdElwK3Yrd1Y4SE5hdWJOeWR5SmdUR3NCUjU5cDRqSGt1WlRtCmR2Z1dEM0pTUGZMRjZPWGRHam9QMms2Q2ZTZWtnZlVSalh4dnR6Y0FJdktmLzcyWkh6Y2lRdGgrVHdBNXhyT04KTThxeXZBMGtLUHNmdFFnSm5NT21TeGdLSnJjUEdydEYzdGlacTRnYXNpTkE4MlBXQUNHTXJpOXZqNERxMnBxeAorb3ZqTkJPOXpsc0ZaajhDN1lUVHhTL1RDdUNEM2JNK09kT3ZjOHJYZmc5eXBzbGdvYmxWMW9zeDdZQlVYWTdoCm1QTWY0bjZLVXlkZndCMXNwb3V2SUIxNWc0Tm8rVXNmRi8yRkFTdHY1YWVMaElQU3lQZkVzdEFTMEsvYlp5cjUKS1hjN0hxSFdrUURoSkM4TEFBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+                  tls.key: >-
+                    LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRREltVjlGeW5kL0VRSXkKdmtwWnRic2dYTmk3OGN4dnlRWXJvZ3BVbDFSU2prcURXcnhaeFQ0L3NIUDV1N1F2dC91T1JZYXluWkJFdy9OTgo4ckhMdkFVRnUzbkxwMnlDbGZQNkY1bVNKUDMyZDdmam9weVZSZ1ptekxNekhCdktrcWc3emExWXZnWTVJUTV5CjJrbTlLQVY5T3RpUlA4Y1d1L1NUNE56UDNzSDJzRll5YnU1MDhndFVMeXFsWU5qRUlhbW02V2N3WGhSaElGbUQKUHpkMG5Jckt1WW5QZ0lLN1ZjN21vTE9uU241TlhBcXJDdXVzOWU0RTJFTWFsMEZONStCTW5YOVluTmJBQ1ZNcwptNVYrb0UrTThnQTFOdGhCMHBIb1ZoaGEva2Uzb25uaWJNR0RWdE5XTWxvejFYWDE1UmthUGZ0YlQ5ditDVWwxCkpyRWU5NzhaQWdNQkFBRUNnZ0VBYkdadEZKTEhwbE96bzJZdldYRWFNTy9iY3h6RVEvZ1dySWVCRzVzM1J2RjcKbEtYNHVHNGRLRitiSEczeGZnUG5IVWUyOVZpdCtHc0hWS3o4cFVMeVY5bXFoSUh4NGxOVUoyYVBaMmswRC9jNwoyUGdyczRMR3ZOQ0xXZWdyb0hsR0RpTWtOSnRqVTRYb2YrbzBCTkxXdklpTE5WcUlwR0ZuVm00aUJQYTBURENoCnZDV0R2ZFVVV3RKaU1vKzFXWVN4UU1xNHpnMitOQ0JmU2Z1NTU5RTZpQ2JCdUo2NFZNZlgzaXpMcnhsRisxc2wKRVcrRGVESHZzKzg0ejkzL01VRUl0elFmUG1KVkd1YXYwMTBYMnd4Vzhpei9UTUZPYmxEcEIyYXAyVzlvZEExNQp3aFVjaGMraFJPZlArbmpjRm9hcWtST0txQnBTYVdVMFZFOG5HYlB5UFFLQmdRRDlrcUlNZXR1K3JnUzdBNWV0ClF3TGxCSUlkazkwVWplK0VhWVNnU01ueGVOSWlZZ2VnLzZYK01qclJPajR1dWltQXh1RjF6M0lMOVpPOWxWTEEKM3JHRUs4THVXVktQL0pwVjVWd0RBUFBob2pYRVIyempnQk5CaXZub1I1NFA5M1haYVRZZGZvMHNYQUFNejc5OApPZW5rczdMbDF5SmpXTWtvSHBMVzRwam8rd0tCZ1FES2hPNE9NdVhVbVAxdVNiRWRKMjEvQlF0M1F1eG1UakFpCnJxYmhCWWdyeEtRWmcrdkVFRDdTR1lPRDh3SWp3RFYya0trVTQ0cDJONnN3Mjk0SGEwVm85UlFsWCtHbGY5cm8KSUl3UVBQbjB0RmMyR09HYlRIZnNDWHRnbGdCbllGNEhQczYzNC85dXFiRDJWYzJvSklCQ3FoWVpSVURHYTNmUwpON3lwZk1Nait3S0JnRHlyR0pwanlxK1VjdzFManI2bGljdkJpR0FMUUpucVc2UVNtdWkrZ1pLRWxjSWtNaThTCisyUVdJSHh1c3ZIN0dITDNJbnBOWjd2MHhhUldWYlpQa2FsTnp4VzN5VWtwNXNNbVhSMWEzUDdmRUg0bG1LZlYKdk1XeHVwa1lpWGpJZkNuSVFtcE1IUHJBQ0VNSWNZZ0hVeTZreitpdDBFeDBzYXducEhwRlBOQ0JBb0dCQUplUApQL0RVV25mdVBzdUl6c200dGhNM0hVdVZoQUZVUm1YT093bHY4R2FBOVNZN09mZ3pDRENIODRxT0ZHM1k3S25jCnZRenE5TFpnRnZlcnM4L3RrYlpvb3prTk5udDY0Y0tTaVArbUFwSUZYTGNaaTgyRFBzUWduSHErQjNOV0JVaDYKMG8yQVRhcnR4NGV5MHdRZ3ZQUW5BZjdMZXh5RFZOcTM1N01Yc1pwOUFvR0JBSldLK0xjRVRuMU5GaFBIVVNwZApYcFhPRW53RkhqV1Vtc0I0VG5qQVBvbUNOVGRIckF1WGdBUksyVzB6NlQ5VnVZMVY5UkNvTjlzRksxaGwxc1RBCkJkejV4TkFsbXVnN21KcjhvTzRYTlV6VXBieXdYNmYzR1pkZG5VSWpTNjVrWDcwdGRFUFJmcnBhNUFoeWhINjQKOW1NQjJaZ3B5VUhOTmRCZjhmZXpzM1pmCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+                type: kubernetes.io/tls
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: operator.openshift.io/v1
+                kind: IngressController
+                metadata:
+                  name: default
+                  namespace: openshift-ingress-operator
+                spec:
+                  defaultCertificate:
+                    name: 'wildcardcert'

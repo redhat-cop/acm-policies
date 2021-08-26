@@ -1,8 +1,0 @@
-apiVersion: apps.open-cluster-management.io/v1
-kind: PlacementRule
-metadata:
-  name: placement-policy-example
-spec:
-  clusterSelector:
-    matchExpressions:
-      - {key: cloud, operator: In, values: ["Amazon"]}
