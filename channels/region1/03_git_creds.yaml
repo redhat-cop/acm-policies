@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-creds
+  namespace: acm-channels
+data:
+  user: YmFzZTY0ZW5jVXNlck5hbWUK # base64encUserName
+  accessToken: YmFzZTY0ZW5jQWNjZXNzVG9rZW4K # base64encAccessToken

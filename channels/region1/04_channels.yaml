@@ -1,0 +1,24 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: cluster-gitops
+  namespace: acm-channels
+spec:
+  type: GitHub
+  pathname: http://yourgitserver/openshift/thisrepo.git
+#  configMapRef:
+#    name: git-certca
+#  secretRef:
+#    name: git-creds
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: cluster-objops
+  namespace: acm-channels
+spec:
+  type: ObjectBucket
+  pathname: https://s3.us-west-1.amazonaws.com/yourbucketname
+  secretRef:
+    name: s3-creds
