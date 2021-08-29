@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: observability-metrics-custom-allowlist
+  namespace: open-cluster-management-observability
+data:
+  metrics_list.yaml: |
+    names:
+      - apiserver_request_total
+      - etcd_server_health_success
+      - storage_operation_errors_total
+      - storage_operation_status_count
+      - coredns_panic_count_total
+      - openshift_kube_scheduler_operator_build_info
+      - openshift_etcd_operator_build_info
+      - openshift_apiserver_operator_build_info
+      - openshift_console_operator_build_info
+      - openshift_kube_apiserver_operator_build_info
+      - openshift_kube_controller_manager_operator_build_info
+      - openshift_service_ca_operator_build_info
+      - openshift_authentication_operator_build_info
+      - openshift_config_operator_build_info
+      - apiserver_request_duration_seconds_bucket

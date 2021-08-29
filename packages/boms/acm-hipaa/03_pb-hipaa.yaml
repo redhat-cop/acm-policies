@@ -1,0 +1,16 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: pb-hipaa
+  namespace: acm-hipaa
+placementRef:
+  name: pr-hipaa
+  namespace: acm-hipaa
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: no-policy
+  namespace: acm-hipaa
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io

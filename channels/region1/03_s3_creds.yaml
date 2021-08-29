@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: s3-creds
+  namespace: acm-channels
+data:
+  AccessKeyID: base64encAccessKeyID
+  SecretAccessKey: base64encSecretAccessKey
+  Region: base64encRegion

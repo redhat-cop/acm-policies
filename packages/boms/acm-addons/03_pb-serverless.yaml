@@ -1,0 +1,16 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: pb-serverless
+  namespace: acm-addons
+placementRef:
+  name: pr-serverless
+  namespace: acm-addons
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: pl-serverless
+  namespace: acm-addons
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io

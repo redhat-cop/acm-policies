@@ -1,0 +1,28 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: pb-sandbox
+  namespace: acm-sandbox
+placementRef:
+  name: pr-sandbox
+  namespace: acm-sandbox
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: pl-serverless
+  namespace: acm-sandbox
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+- name: pl-default-ingress-certificate
+  namespace: acm-sandbox
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+- name: pl-olm-disable-defaults
+  namespace: acm-sandbox
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+- name: pl-opa-image-latest
+  namespace: acm-sandbox
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io

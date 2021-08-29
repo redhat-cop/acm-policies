@@ -1,0 +1,20 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: pr-sandbox
+  namespace: acm-sandbox
+spec:
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
+#  clusterNames:
+#    - "cluster1"
+#    - "cluster2"
+  clusterSelector:
+    matchLabels:
+      local-cluster: 'true'
+      policy: 'sandbox'
+#  clusterSelector:
+#    matchExpressions:
+#      - {key: clustertype, operator: In, values: ["hub"]}

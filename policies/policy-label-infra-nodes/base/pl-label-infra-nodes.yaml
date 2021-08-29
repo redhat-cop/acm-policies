@@ -1,0 +1,37 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: pl-label-infra-nodes
+spec:
+  remediationAction: inform
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-label-infra-nodes
+        spec:
+          severity: medium
+          namespaceSelector:
+            exclude: []
+            include:
+              - "default"
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: Node
+                name: infra1
+                metadata:
+                    labels:
+                      node-role.kubernetes.io/infra: ""
+            #- complianceType: mustnothave
+            #  objectDefinition:
+            #    apiVersion: v1
+            #    kind: Node
+            #    name: infra1
+            #    metadata:
+            #        labels:
+            #          node-role.kubernetes.io/worker: ""

@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- ../base
+
+# When applying the kustomization for production, use the production
+# branch and leave the reconcile-rate to implicit default of 'medium'.
+#   medium = check for new commits every 3 minutes
+#            force reconcile every 15 minutes
+commonAnnotations:
+  apps.open-cluster-management.io/github-branch: master

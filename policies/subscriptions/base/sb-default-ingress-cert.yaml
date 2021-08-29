@@ -1,0 +1,21 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: sb-default-ingress-cert
+  namespace: acm-sandbox
+  labels:
+    subscription-pause: "false"
+  annotations:
+    apps.open-cluster-management.io/github-path: policies/policy-default-ingress-cert/sandbox
+spec:
+  channel: acm-channels/cluster-gitops
+  placement:
+    local: true
+#  timewindow:
+#    windowtype: "active"
+#    location: "America/Los_Angeles"
+#    daysofweek: [ "Friday", "Saturday", "Sunday" ]
+#    hours:
+#      - start: "05:00PM"
+#        end: "10:00PM"
