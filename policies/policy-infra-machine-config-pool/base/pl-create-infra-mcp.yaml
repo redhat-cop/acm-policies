@@ -2,10 +2,6 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
-  annotations:
-    policy.open-cluster-management.io/categories: ""
-    policy.open-cluster-management.io/controls: ""
-    policy.open-cluster-management.io/standards: ""
   name: pl-create-infra-mcp
 spec:
   disabled: false
@@ -41,4 +37,4 @@ spec:
                   node-role.kubernetes.io/infra: "" # testing 
         remediationAction: enforce
         severity: low
-  remediationAction: enforce
+  remediationAction: inform
