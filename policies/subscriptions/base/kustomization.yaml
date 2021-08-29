@@ -9,4 +9,5 @@ resources:
 - sb-label-infra-nodes.yaml
 - sb-olm-disable-defaults.yaml
 - sb-opa-image-latest.yaml
+- sb-registry-pv-nfs.yaml
 - sb-serverless.yaml

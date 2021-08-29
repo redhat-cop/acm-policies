@@ -1,0 +1,35 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: pl-registry-pv-nfs
+spec:
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: policy-registry-pv-nfs
+      spec:
+        namespaceSelector:
+          exclude: ["kube-*"]
+          include: ["custom-policies"]
+        object-templates:
+        - complianceType: musthave
+          objectDefinition:
+            apiVersion: v1
+            kind: PersistentVolume
+            metadata:
+              name: registry-pv
+            spec:
+        - complianceType: musthave
+          objectDefinition:
+            apiVersion: imageregistry.operator.openshift.io/v1
+            kind: Config
+            metadata:
+              name: cluster
+            spec:
+        remediationAction: inform
+        severity: low
+  remediationAction: inform
