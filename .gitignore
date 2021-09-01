@@ -2,4 +2,4 @@
 # that should not be stored.
 channels/
 observability/
-
+bootstrap.sh
