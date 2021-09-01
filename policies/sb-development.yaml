@@ -9,6 +9,7 @@ metadata:
   annotations:
     apps.open-cluster-management.io/github-path: policies/subscriptions/development
     apps.open-cluster-management.io/github-branch: development
+    apps.open-cluster-management.io/reconcile-rate: "off"
 spec:
   channel: acm-channels/cluster-gitops
   placement:
