@@ -5,19 +5,24 @@ metadata:
   name: observability
   namespace: open-cluster-management-observability
 spec:
-  availabilityConfig: High
-  enableDownSampling: false
+  advanced:
+    retentionConfig:
+      retentionResolution1h: 30d
+      retentionResolution5m: 14d
+      retentionResolutionRaw: 5d
+  enableDownsampling: false
   imagePullPolicy: Always
   imagePullSecret: multiclusterhub-operator-pull-secret
-  observabilityAddonSpec: 
+  observabilityAddonSpec:
     enableMetrics: true
-    interval: 60 
-  retentionResolution1h: 30d
-  retentionResolution5m: 14d
-  retentionResolutionRaw: 5d
-  storageConfigObject:
+    interval: 60
+  storageConfig:
+    alertmanagerStorageSize: 10Gi
+    compactStorageSize: 10Gi
     metricObjectStorage:
-      name: acmthanos
       key: thanos.yaml
-    statefulSetSize: 10Gi
-    statefulSetStorageClass: gp2
+      name: acmthanos
+    receiveStorageSize: 10Gi
+    ruleStorageSize: 10Gi
+    storageClass: gp2
+    storeStorageSize: 10Gi
