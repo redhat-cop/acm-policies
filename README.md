@@ -10,6 +10,21 @@ Please do not use this repository as your GitOps endpoint. Clone or fork the rep
 
 ---
 
+## Quickstart
+1. Clone or fork this repo. You will need to fill in a few of the Secrets for this to work.
+2. Under the channels folder, copy or rename the region1 folder to represent where you RHACM instance is located, like lab or datacenter1. Update the following files:
+    1. 03_git_certca.yaml (if necessary)
+    2. 03_git_creds.yaml (if necessary)
+    3. 04_channels.yaml
+3. Under the observability folder, copy or rename the region1 folder to the same name you selected above (or if you do not wish to setup observability, delete the region1 folder). Update the following files:
+    1. 02_objstrcreds.yaml
+    2. 02_pullsecret.yaml
+4. Download the bootstrap.sh file to where you run oc or kubectl.
+5. Update the bootstrap file to have the correct environment and region values.
+6. Run bootstrap.sh
+
+---
+
 ## Project Directories
 
 There are four directories to provide the channel credentials, observability credentials, policy groupings and the policies themselves.
